@@ -10,3 +10,4 @@ Thanks!!
 #### Folks who have used this template
 - [Bao Tran Truong](https://btrantruong.github.io/)
 - [Rachith Aiyappa](https://rachithaiyappa.github.io/)
+- [Daniel Kaiser](https://kaiser-dan.github.io/)
