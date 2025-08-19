@@ -3,9 +3,13 @@
 % The template is designed for easy customization and clear structure.
 %
 % Author: Matthew DeVerna (www.matthewdeverna.com)
-% Date: 2024
-% Design: Cased on Hause Lin's CV (hauselin.com)
+% Originally Published Date: 2024
+% Design: Inspired by Hause Lin's CV (hauselin.com), which has changed a good deal since this was created.
 % 
+% Change Log:
+% -----------------
+% - 2025-08-19: Include reverse numbering for bibliography sections
+%
 % Project Overview:
 % -----------------
 % This LaTeX document is designed to help you create a professional CV or 
@@ -50,6 +54,23 @@
     defernumbers=true,  % Delays the assignment of citation numbers until the end of the document, allowing for the correct order of citations within each bibliography section.
 ]{biblatex}
 \addbibresource{ref.bib} % Adds the bibliography resource file 'ref.bib' containing all the references.
+
+% -- Reverse-numbered bibliography (3, 2, 1) environment START ---
+\usepackage{etaremune}
+\defbibenvironment{revbib}
+  {%
+    \csname begin\endcsname{etaremune}%
+    % Align indent with biblatex’s numeric label width
+    \setlength{\leftmargin}{\dimexpr\labelnumberwidth+\labelsep\relax}%
+    % Prefix from \newrefcontext[labelprefix=...] + descending number (no parentheses)
+    \renewcommand*{\labelenumi}{\printfield{labelprefix}\arabic{enumi}}%
+  }
+  {%
+    \csname end\endcsname{etaremune}%
+  }
+  {\item}
+% -- Reverse-numbered bibliography environment END ---
+% NOTE: If you want the publications list in each section to start from 1 and count up (1, 2, 3), then you can simply remove the `env=revbib` line in all of the \printbibliography lines.
 
 % Allows columns that stretch across pages
 \usepackage{longtable}
@@ -149,20 +170,21 @@ $\dagger \rightarrow$ Equal contribution
     type=article, % Only include @article ref.bib items
     heading=none, % Do not include header. Gives us more control.
     resetnumbers=true, % Start item counter from zero
-    keyword=J % Include items in ref.bib with keyword={J}
+    keyword=J, % Include items in ref.bib with keyword={J}
+    env=revbib
 ]
 
 \pdfbookmark[2]{Peer-reviewed Conference Proceedings}{conferences}
 \subsection*{Peer-reviewed Conference Proceedings}
 \label{conferences}
 \newrefcontext[labelprefix=C]
-\printbibliography[type=inproceedings,heading=none,resetnumbers=true,keyword=C]
+\printbibliography[type=inproceedings,heading=none,resetnumbers=true,keyword=C, env=revbib]
 
 \pdfbookmark[2]{Working papers}{working-papers}
 \subsection*{Working papers}
 \label{working-papers}
 \newrefcontext[labelprefix=W]
-\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=R]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=R, env=revbib]
     
 
 \pdfbookmark[1]{Tools \& Software}{tools}
@@ -185,18 +207,18 @@ $\dagger \rightarrow$ Equal contribution
 \subsection*{Talks}
 \label{talks}
 \newrefcontext[labelprefix=T]
-\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=T]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=T, env=revbib]
 
 \pdfbookmark[2]{Posters}{posters}
 \subsection*{Posters}
 \label{posters}
 \newrefcontext[labelprefix=P]        
-\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=P]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=P, env=revbib]
 
 \pdfbookmark[2]{Demonstrations \& Tutorials}{demos}
 \subsection*{Demonstrations \& Tutorials}
 \label{demos}
-\newrefcontext[labelprefix=D] \printbibliography[type=misc,heading=none,resetnumbers=true,keyword=D]
+\newrefcontext[labelprefix=D] \printbibliography[type=misc,heading=none,resetnumbers=true,keyword=D, env=revbib]
 
 
 \pdfbookmark[1]{Selected Media Coverage}{media}
