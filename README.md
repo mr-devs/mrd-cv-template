@@ -12,6 +12,7 @@ The template can be accessed via the [Clean Academic CV Template on Overleaf](ht
 - Easy to customize with different fonts, link colors, etc.
   - If you don't know where to start, links to different LaTeX fonts and colors are included within the document
 - Manage and format your publications with BibLaTex
+  - Includes reverse numbering for bibliography sections
 - Leverages PDF Bookmarks providing full control over the side-bar sections within the document for easy PDF navigation
 
 ### Getting Started
