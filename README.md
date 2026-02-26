@@ -35,4 +35,4 @@ Thanks!!
 - [Rachith Aiyappa](https://rachithaiyappa.github.io/)
 - [Daniel Kaiser](https://kaiser-dan.github.io/)
 - [Kevin W. Jin](https://kevinwjin.com/)
-- [Larry Zhang]([url](https://www.larryzhang.io/))
+- [Larry Zhang](https://www.larryzhang.io/)
