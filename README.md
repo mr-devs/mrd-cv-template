@@ -14,6 +14,7 @@ The template can be accessed via the [Clean Academic CV Template on Overleaf](ht
 - Manage and format your publications with BibLaTex
   - Includes reverse numbering for bibliography sections
 - Leverages PDF Bookmarks providing full control over the side-bar sections within the document for easy PDF navigation
+- Includes Claude Code commands for automatically updating different sections of the document
 
 ### Getting Started
 
