@@ -1,9 +1,5 @@
 # mrd-cv-template
 
-## Overleaf/LaTeX CV template
-
-The template can be accessed via the [Clean Academic CV Template on Overleaf](https://www.overleaf.com/latex/templates/clean-academic-cv-template/tjpjkzmvztwn) and directly imported into Overleaf.
-
 ### Key Features
 
 - Designed to be easy to update and maintain overtime, with academics in mind
@@ -37,3 +33,8 @@ Thanks!!
 - [Daniel Kaiser](https://kaiser-dan.github.io/)
 - [Kevin W. Jin](https://kevinwjin.com/)
 - [Larry Zhang](https://www.larryzhang.io/)
+
+## Overleaf/LaTeX CV template
+
+There is an [**OLD** template on Overleaf](https://www.overleaf.com/latex/templates/clean-academic-cv-template/tjpjkzmvztwn) that can be directly imported into Overleaf.
+This is old because Overleaf no longer supports templates for CVs ([source](https://docs.overleaf.com/templates/submitting-to-the-overleaf-template-gallery#Other_ways_to_share_templates,_examples_and_completed_works)).
