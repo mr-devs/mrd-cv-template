@@ -34,6 +34,7 @@ Thanks!!
 - [Kevin W. Jin](https://kevinwjin.com/)
 - [Larry Zhang](https://www.larryzhang.io/)
 - [Do Won Kim](https://do-won.github.io/)
+- [Hannah Rose Kirk](https://www.hannahrosekirk.com/)
 
 ## Overleaf/LaTeX CV template
 
