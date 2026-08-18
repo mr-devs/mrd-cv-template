@@ -33,6 +33,7 @@ Thanks!!
 - [Daniel Kaiser](https://kaiser-dan.github.io/)
 - [Kevin W. Jin](https://kevinwjin.com/)
 - [Larry Zhang](https://www.larryzhang.io/)
+- [Do Won Kim](https://do-won.github.io/)
 
 ## Overleaf/LaTeX CV template
 
