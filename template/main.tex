@@ -9,6 +9,8 @@
 % Change Log:
 % -----------------
 % - 2025-08-19: Include reverse numbering for bibliography sections
+% - 2026-08-29: Fix \cite printing the mirror image of the reversed list
+%               labels (e.g. citing J6 printed "J2" in a 6-item list)
 % 
 % Project Overview:
 % -----------------
@@ -71,6 +73,49 @@
   {\item}
 % -- Reverse-numbered bibliography environment END ---
 % NOTE: If you want the publications list in each section to start from 1 and count up (1, 2, 3), then you can simply remove the `env=revbib` line in all of the \printbibliography lines.
+
+% -- Keep \cite in sync with the reversed numbers START ---
+% WHY THIS IS NEEDED:
+% `etaremune` numbers the printed list downwards (N, ..., 2, 1), but BibLaTeX's
+% own `labelnumber` field still counts upwards (1, 2, ..., N) in that same
+% order. Because \cite prints `labelnumber`, an uncorrected \cite emits the
+% MIRROR IMAGE of the label you can see in the list: in a 6-item list, citing
+% the item labelled J6 would print "J2", and so on.
+%
+% The fix: record how many entries each labelprefix list holds (written to the
+% .aux file while the list is typeset), then print (N + 1 - labelnumber)
+% wherever \cite asks for a number. The visible list labels are produced by
+% etaremune and are left untouched.
+%
+% NOTE: because the counts travel through the .aux file, a fresh build needs
+% two LaTeX passes before citations settle. `latexmk` handles this for you.
+% If you removed `env=revbib` above (i.e. you are NOT reverse numbering), you
+% should delete this block too.
+\makeatletter
+% Storage for the per-prefix totals, replayed from the .aux file each run.
+\providecommand*{\revbibsetcount}[2]{}
+\renewcommand*{\revbibsetcount}[2]{%
+  \expandafter\xdef\csname revbib@count@#1\endcsname{#2}%
+}
+% Entries are typeset 1..N, so the last value written for a prefix equals N.
+\AtEveryBibitem{%
+  \iffieldundef{labelprefix}
+    {}
+    {\savefield{labelprefix}{\revbib@pfx}%
+     \savefield{labelnumber}{\revbib@num}%
+     \protected@write\@auxout{}{%
+       \string\revbibsetcount{\revbib@pfx}{\revbib@num}}}%
+}
+% Turn an ascending number into the descending one the reader actually sees.
+\newcommand*{\revbib@reverse}[2]{%
+  \ifcsname revbib@count@#1\endcsname
+    \number\numexpr\csname revbib@count@#1\endcsname+1-#2\relax
+  \else
+    #2% no count recorded yet (first pass) -- fall back to the raw number
+  \fi}
+\DeclareFieldFormat{labelnumber}{\revbib@reverse{\thefield{labelprefix}}{#1}}
+\makeatother
+% -- Keep \cite in sync with the reversed numbers END ---
 
 % Allows columns that stretch across pages
 \usepackage{longtable}
@@ -184,7 +229,7 @@ $\dagger \rightarrow$ Equal contribution
 \subsection*{Working papers}
 \label{working-papers}
 \newrefcontext[labelprefix=W]
-\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=R, env=revbib]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=W, env=revbib]
     
 
 \pdfbookmark[1]{Tools \& Software}{tools}
