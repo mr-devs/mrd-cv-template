@@ -1,5 +1,9 @@
 # mrd-cv-template
 
+### Example
+
+See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, filled with placeholder content that exercises every feature listed below.
+
 ### Key Features
 
 - Designed to be easy to update and maintain overtime, with academics in mind
@@ -8,7 +12,7 @@
 - Easy to customize with different fonts, link colors, etc.
   - If you don't know where to start, links to different LaTeX fonts and colors are included within the document
 - Manage and format your publications with BibLaTex
-  - Includes reverse numbering for bibliography sections
+  - Includes reverse numbering for bibliography sections, with `\cite` kept in sync with the reversed labels (see the Publications and Selected Media Coverage sections of [cv-example.pdf](cv-example.pdf))
 - Leverages PDF Bookmarks providing full control over the side-bar sections within the document for easy PDF navigation
 - Includes Claude Code commands for automatically updating different sections of the document
 
@@ -19,6 +23,8 @@
 3. Update the ref.bib file with your publications and categorize them using keywords.
 
 > **Note**: Detailed instructions for each section are included within each file to guide you through the customization process.
+
+> **Tip**: Compare your output against [cv-example.pdf](cv-example.pdf) to see how each section is meant to render. Rebuild it at any time with `latexmk -pdf main.tex` from the `template/` directory.
 
 ### Found this useful?
 

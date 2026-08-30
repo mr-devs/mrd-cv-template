@@ -35,9 +35,26 @@ Thumbs.db
 *.nav
 *.snm
 *.vrb
+*.xdv
+*.brf
+*.idx
+*.ilg
+*.ind
+*.auxlock
+*.figlist
+*.makefile
+*.pdfsync
+*.synctex(busy)
+*.synctex.gz(busy)
+*.bbl-SAVE-ERROR
+*.upa
+*.upb
 
 # PDF output files (since this is a template, users typically don't want to track their personal CVs)
 *.pdf
+
+# ...except the rendered example CV, which is committed so it can be linked from the README
+!cv-example.pdf
 
 # Editor files
 .vscode/
