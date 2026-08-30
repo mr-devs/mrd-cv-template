@@ -1,5 +1,13 @@
 # mrd-cv-template
 
+## What is this?
+
+This is the CV template that I use.
+I've converted it into a template hoping that it might be helpful for others.
+
+The idea was to make it as easy as possible to manage and update on a regular basis.
+I think the template makes this super easy on its own, but the inclusion of Claude Code [skills](https://agentskills.io) makes it even easier (included in the `.claude/` directory).
+
 ### Example
 
 See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, filled with placeholder content that exercises every feature listed below.
@@ -23,8 +31,6 @@ See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, fi
 3. Update the ref.bib file with your publications and categorize them using keywords.
 
 > **Note**: Detailed instructions for each section are included within each file to guide you through the customization process.
-
-> **Tip**: Compare your output against [cv-example.pdf](cv-example.pdf) to see how each section is meant to render. Rebuild it at any time with `latexmk -pdf main.tex` from the `template/` directory.
 
 ### Found this useful?
 
