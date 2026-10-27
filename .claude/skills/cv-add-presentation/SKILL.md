@@ -1,11 +1,11 @@
 ---
 name: cv-add-presentation
-description: Use when adding a talk, poster, invited talk, or demonstration to Matthew DeVerna's LaTeX CV bibliography at /Users/mdeverna/Documents/Projects/cv/ref.bib
+description: Use when adding a talk, poster, invited talk, or demonstration to the LaTeX CV bibliography (template/ref.bib)
 ---
 
 # Adding a Presentation to ref.bib
 
-**Reference file:** Read `~/.claude/reference/cv-bib-conventions.md` for full templates and formatting rules.
+**Reference file:** Read `.claude/reference/cv-bib-conventions.md` for full templates and formatting rules.
 
 All presentations use `@misc`. The `keywords` field determines which subsection they appear in.
 
@@ -47,10 +47,11 @@ howpublished = {Invited to the Lab Name, University (Virtual)},
 - [ ] `\ul{}` wraps venue name (for formal venues)
 - [ ] Location in parentheses after venue
 - [ ] `(Virtual)` used for remote presentations
-- [ ] `; presented by First Last` appended if DeVerna didn't present
+- [ ] `; presented by First Last` appended if the CV owner didn't present
 - [ ] `month` field included (three-letter abbreviation: `jan`, `feb`, etc.)
-- [ ] DeVerna's name bolded: `\textbf{DeVerna, Matthew R.}`
-- [ ] Title in double braces: `title = {{Title.}}`
+- [ ] CV owner's name bolded (see the reference file): `\textbf{Last, First M.}`
+- [ ] Title in double braces, no trailing period: `title = {{Title}}`
+      (`main.tex` adds the period for misc/thesis entries via `\DeclareFieldFormat`)
 
 ## Common Mistakes
 

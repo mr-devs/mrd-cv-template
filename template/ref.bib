@@ -2,9 +2,12 @@
 % -----------------------------
 % 1. Mark items with a "keyword" that specifies the type of item they will be grouped by within the CV
 % 2. Call \printbibliography in main.tex with the class ('article', 'misc', etc.) and keyword to "select" only the items you want for that group of items
+% 3. Leave the trailing period off titles; the bibliography style supplies title punctuation
 
 
 % Journals
+% Give articles a `month` so same-year entries sort correctly.
+% main.tex hides it at print time, so only the year is shown.
 % #########################################################
 @article{art1,
     author={\textbf{Smith, John R.} and Brown, Michael and Yang, Steven},
@@ -12,6 +15,7 @@
     journal = {Journal Title},
     volume = {1},
     number = {1},
+    month = mar,
     year = {2023},
     url = {https://example.com},
     keywords={J},
@@ -25,6 +29,7 @@
     journal = {Journal Title},
     volume = {1},
     number = {1},
+    month = sep,
     year = {2023},
     url = {https://example.com},
     keywords={J}
@@ -38,6 +43,7 @@
     volume = {2},
     number = {4},
     pages = {101--120},
+    month = feb,
     year = {2024},
     url = {https://example.com},
     keywords={J}
@@ -84,43 +90,103 @@
 
 
 
-% Working papers
+% Manuscripts under review
 % All of the non-standard items require the flexible "misc" class
+% Leave the trailing period off titles -- main.tex adds it for misc entries
+% #########################################################
+
+@misc{Review1,
+    title={{Sweet new project about to blow up the scene!}},
+    author={\textbf{Smith, John} and Buddy, Best and Super, Advisor},
+    howpublished={Revise and Resubmit at PNAS},
+    year={2023},
+    url={https://example.com},
+    keywords={R}
+}
+
+@misc{Review2,
+    title={{The freshest preprint of the bunch}},
+    author={\textbf{Smith, John} and Buddy, Best},
+    howpublished={Under review at Nature Human Behaviour},
+    year={2024},
+    url={https://example.com},
+    keywords={R}
+}
+
+
+% Manuscripts in preparation
 % #########################################################
 
 @misc{Working1,
-    title={Sweet new project about to blow up the scene!},
-    author={\textbf{Smith, John}. and Buddy, Best and Super, Advisor},
-    howpublished={ArXiv[Preprint], Revise and Resubmit @ PNAS},
-    year={2023},
-    url={https://example.com},
-    keywords={W}
-}
-
-@misc{Working2,
-    title={Another good one!},
-    author={\textbf{Smith, John}. and Buddy, Best and Super, Advisor},
-    howpublished={ArXiv[Preprint], Revise and Resubmit @ PNAS},
+    title={{Another good one!}},
+    author={\textbf{Smith, John} and Buddy, Best and Super, Advisor},
+    howpublished={arXiv[Preprint]},
     note = {\href{https://example.com}{Embed extra links with the `note' field}},
     year={2023},
     url={https://example.com},
     keywords={W}
 }
 
-@misc{Working3,
-    title={The freshest preprint of the bunch.},
-    author={\textbf{Smith, John}. and Buddy, Best},
-    howpublished={ArXiv[Preprint], Under review @ Nature Human Behaviour},
+@misc{Working2,
+    title={{A project that is still taking shape}},
+    author={\textbf{Smith, John} and Super, Advisor},
+    howpublished={In preparation},
     year={2024},
-    url={https://example.com},
     keywords={W}
 }
+
+
+% Other Writings (Dissertations, popular media, blogs, ...)
+% #########################################################
+
+@misc{Dissertation,
+    title={{Everything I learned in graduate school}},
+    author={\textbf{Smith, John}},
+    howpublished={PhD dissertation, Your University},
+    month=jun,
+    year={2025},
+    url={https://example.com},
+    keywords={O}
+}
+
+@misc{Blog1,
+    title={{A plain-language summary of my latest paper}},
+    author={\textbf{Smith, John}},
+    howpublished={The Cool Science Blog},
+    month=nov,
+    year={2024},
+    url={https://example.com},
+    keywords={O}
+}
+
+
+% Invited Talks
+% #########################################################
+
+@misc{Invited1,
+    title   = {{Invited talk with a memorable title}},
+    author  = {\textbf{Smith, John}},
+    howpublished={\ul{Department of Cool Science Seminar Series}, Your University (Bloomington, IN, USA)},
+    month   = mar,
+    year    = {2023},
+    keywords={I}
+}
+
+@misc{Invited2,
+    title   = {{A keynote that everyone remembers}},
+    author  = {\textbf{Smith, John}},
+    howpublished={\ul{Workshop on Very Important Questions} (Virtual)},
+    month   = may,
+    year    = {2024},
+    keywords={I}
+}
+
 
 % Talks
 % #########################################################
 
 @misc{Talk1,
-    title   = {Awe inspiring presentation.},
+    title   = {{Awe inspiring presentation}},
     author  = {\textbf{Smith, John} and Buddy, Best},
     howpublished={\ul{10th International Conference on Cool Science} (Philadelphia, PA, USA)},
     month    = jul,
@@ -129,7 +195,7 @@
 }
 
 @misc{Talk2,
-    title={Anotha' one!.},
+    title={{Anotha' one!}},
     author={\textbf{Khaled, DJ}},
     howpublished={\ul{Fourth Multidisciplinary International Symposium on Blasting Bangers} (Virtual)},
     note = {\href{https://example.com}{Links like this}},
@@ -140,19 +206,18 @@
 }
 
 @misc{Talk3,
-    title   = {Invited talk with a memorable title.},
-    author  = {\textbf{Smith, John}},
-    howpublished={\ul{Department of Cool Science Seminar Series}, Your University (Bloomington, IN, USA)},
-    month   = mar,
-    year    = {2023},
+    title   = {{A talk someone else gave on our work}},
+    author  = {Buddy, Best and \textbf{Smith, John}},
+    howpublished={\ul{Annual Meeting of the Cool Science Society} (Chicago, IL, USA; presented by Best Buddy)},
+    month   = jan,
+    year    = {2024},
     keywords={T}
 }
-
 
 % Posters
 % #########################################################
 @misc{Poster1,
-    title   = {{Poster Name here.}},
+    title   = {{Poster Name here}},
     author  = {\textbf{Smith, John} and Author1, Co and Author2, Co},
     howpublished={\ul{Another Cool Conference} (Cambridge, MA, USA)},
     month    = jul,
@@ -160,7 +225,7 @@
     keywords={P}
 }
 @misc{Poster2,
-    title   = {{Poster Name here.}},
+    title   = {{Poster Name here}},
     author  = {\textbf{Smith, John} and Author1, Co and Author2, Co},
     howpublished={\ul{Another Cool Conference} (Cambridge, MA, USA)},
     month    = apr,
@@ -169,7 +234,7 @@
 }
 
 @misc{Poster3,
-    title   = {{Poster Name here.}},
+    title   = {{Poster Name here}},
     author  = {\textbf{Smith, John} and Author1, Co},
     howpublished={\ul{Yet Another Cool Conference} (Chicago, IL, USA)},
     month   = sep,
@@ -185,7 +250,7 @@
 
 @misc{demo1,
     author = {\textbf{Smith, John}},
-    title = {Exciting demonstration.},
+    title = {{Exciting demonstration}},
     howpublished = {\ul{Another Cool Conference} Workshop on Technical Things (Cambridge, MA, USA)},
     month = apr,
     year = {2022},
@@ -193,7 +258,7 @@
 }
 @misc{demo2,
     author = {\textbf{Smith, John}},
-    title = {CoVaxxy: Linking COVID-19 vaccine adoption and online (mis)information.},
+    title = {{CoVaxxy: Linking COVID-19 vaccine adoption and online (mis)information}},
     note = {Include links this way for the \href{https://example.com}{Cool Organization}},
     month = jun,
     year = {2021},
@@ -202,7 +267,7 @@
 
 @misc{demo3,
     author = {\textbf{Smith, John} and Author1, Co},
-    title = {Hands-on tutorial for the monkeytools package.},
+    title = {{Hands-on tutorial for the monkeytools package}},
     howpublished = {\ul{Super Cool Conference} Tutorial Track (Seattle, WA, USA)},
     month = aug,
     year = {2024},

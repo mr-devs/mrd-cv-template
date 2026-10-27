@@ -1,6 +1,8 @@
 # CV Bibliography Conventions — ref.bib
 
-File: `/Users/mdeverna/Documents/Projects/cv/ref.bib`
+File: `template/ref.bib` (relative to the repository root)
+
+> **Make this yours:** replace the placeholder name `Smith, John R.` throughout this file with your own name, in `Last, First M.` format, so new entries bold the right author.
 
 ---
 
@@ -10,7 +12,7 @@ File: `/Users/mdeverna/Documents/Projects/cv/ref.bib`
 |------------|------------|------------|--------------|
 | `@article` | `J` | Journal Articles | J |
 | `@inproceedings` | `C` | Peer-reviewed Conference Proceedings | C |
-| `@misc` | `R` | Manuscripts under review | R |
+| `@misc` | `R` | Manuscripts Under Review | R |
 | `@misc` | `W` | Manuscripts in Preparation | W |
 | `@misc` | `O` | Other Writings | O |
 | `@misc` | `I` | Invited Talks | I |
@@ -22,13 +24,14 @@ File: `/Users/mdeverna/Documents/Projects/cv/ref.bib`
 
 ## Author Formatting
 
-- **Always bold DeVerna**: `\textbf{DeVerna, Matthew R.}` (Last, First M. format)
+- **Always bold the CV owner**: `\textbf{Smith, John R.}` (Last, First M. format)
 - **All authors**: `Last, First M.` format, separated by ` and `
-- **Equal contribution**: place `$^\diamond$` *immediately after the last name*, before the comma:
+- **Equal contribution**: place `$^{\dagger}$` *immediately after the last name*, before the comma
+  (the marker is explained under the Publications heading in `main.tex`):
   ```
-  Ghosh$^\diamond$, Shalmoli and \textbf{DeVerna, Matthew R.}$^\diamond$ and Menczer, Filippo
+  Doe$^{\dagger}$, Jane and \textbf{Smith$^{\dagger}$, John R.} and Roe, Richard
   ```
-  No space between the name and `$^\diamond$`.
+  No space between the name and `$^{\dagger}$`.
 
 ---
 
@@ -36,9 +39,12 @@ File: `/Users/mdeverna/Documents/Projects/cv/ref.bib`
 
 Use double braces to preserve capitalization:
 ```
-title = {{Title With Preserved Caps.}},
+title = {{Title With Preserved Caps}},
 ```
-Titles end with a period inside the inner braces.
+Leave the trailing period **off**. `main.tex` adds title punctuation for misc entries
+(via `\DeclareFieldFormat`) and the bibliography style handles the rest; a period in
+the data doubles up or breaks `... in Proceedings ...`. Titles that end in `?` or `!`
+keep that mark.
 
 ---
 
@@ -47,17 +53,21 @@ Titles end with a period inside the inner braces.
 ### @article (keyword J)
 ```bibtex
 @article{LastnameYEARShortTitle,
-    title   = {{Title.}},
-    author  = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title   = {{Title}},
+    author  = {\textbf{Smith, John R.} and Coauthor, First M.},
     journal = {Journal Name},
     volume  = {1},
     number  = {2},
     pages   = {1--10},
+    month   = mar,
     year    = {2024},
     url     = {https://doi.org/...},
     keywords= {J}
 }
 ```
+Always include `month` on articles: it orders same-year articles correctly, and
+`main.tex` hides it at print time so only the year is shown.
+
 Optional `addendum` for footnotes under entry:
 ```
 addendum = {\\ -- Note text, e.g. award or citation}
@@ -66,8 +76,8 @@ addendum = {\\ -- Note text, e.g. award or citation}
 ### @inproceedings (keyword C)
 ```bibtex
 @inproceedings{LastnameYEARShortTitle,
-    author    = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
-    title     = {{Title.}},
+    author    = {\textbf{Smith, John R.} and Coauthor, First M.},
+    title     = {{Title}},
     booktitle = {Proceedings of the Conference Name},
     volume    = {15},
     pages     = {1--10},
@@ -81,8 +91,8 @@ addendum = {\\ -- Note text, e.g. award or citation}
 ### @misc — Under Review (keyword R)
 ```bibtex
 @misc{LastnameYEARShortTitle,
-    title        = {{Title.}},
-    author       = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title        = {{Title}},
+    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
     howpublished = {Revise and Resubmit in [Venue Name]},
     year         = {2024},
     url          = {https://doi.org/...},
@@ -94,8 +104,8 @@ Use `Under review at [Venue]` if not yet R&R. Use venue name only (not "Proceedi
 ### @misc — In Preparation (keyword W)
 ```bibtex
 @misc{LastnameYEARShortTitle,
-    title        = {{Title.}},
-    author       = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title        = {{Title}},
+    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
     howpublished = {arXiv[Preprint]},
     year         = {2024},
     url          = {https://doi.org/...},
@@ -106,9 +116,9 @@ Use `Under review at [Venue]` if not yet R&R. Use venue name only (not "Proceedi
 ### @misc — Other Writings (keyword O)
 ```bibtex
 @misc{LastnameYEARShortTitle,
-    author       = {Matthew R. DeVerna},
-    title        = {Title.},
-    howpublished = {PhD dissertation, Indiana University},
+    author       = {\textbf{Smith, John R.}},
+    title        = {{Title}},
+    howpublished = {PhD dissertation, Your University},
     month        = jun,
     year         = {2025},
     keywords     = {O}
@@ -127,13 +137,13 @@ howpublished = {\ul{Venue Name} (City, State, Country)},
 - Virtual events: `(Virtual)` instead of city/state/country
 - Presented by someone else: append `; presented by [Name]` inside the parens:
   ```
-  howpublished = {\ul{Venue Name} (City, State; presented by Francesco Pierri)},
+  howpublished = {\ul{Venue Name} (City, State; presented by First Last)},
   ```
 
 ### howpublished format for informal venues (D entries)
 Informal demos may omit `\ul{}`:
 ```
-howpublished = {Invited to the Learning Informatics Lab, University of Minnesota (Virtual)},
+howpublished = {Invited to the Cool Lab, Your University (Virtual)},
 ```
 
 ### month field
@@ -142,8 +152,8 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ### Invited Talk (keyword I)
 ```bibtex
 @misc{VenueYEAR,
-    title        = {{Title.}},
-    author       = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title        = {{Title}},
+    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
     howpublished = {\ul{Seminar/Lab/Event Name} (City, State, Country)},
     month        = apr,
     year         = {2024},
@@ -154,8 +164,8 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ### Talk (keyword T)
 ```bibtex
 @misc{VenueShortYEAR,
-    title        = {{Title.}},
-    author       = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title        = {{Title}},
+    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jul,
     year         = {2024},
@@ -166,8 +176,8 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ### Poster (keyword P)
 ```bibtex
 @misc{VenueShortYEAR,
-    title        = {{Title.}},
-    author       = {\textbf{DeVerna, Matthew R.} and Coauthor, First M.},
+    title        = {{Title}},
+    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jul,
     year         = {2024},
@@ -178,8 +188,8 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ### Demo/Tutorial (keyword D)
 ```bibtex
 @misc{ToolNameN,
-    author       = {\textbf{DeVerna, Matthew R.}},
-    title        = {Tool Name: Subtitle.},
+    author       = {\textbf{Smith, John R.}},
+    title        = {{Tool Name: Subtitle}},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jun,
     year         = {2021},
@@ -197,7 +207,7 @@ Entries are grouped by comment headers in this order:
 % Conferences
 % Manuscripts under review
 % Manuscripts in preparation
-% Other Writings (Popular media, blogs, ...)
+% Other Writings (Dissertations, popular media, blogs, ...)
 % Invited Talks
 % Talks
 % Posters
@@ -209,5 +219,5 @@ Add new entries within the appropriate section block.
 
 ## Cite Key Conventions
 
-Pattern: `LastnameYEARShortTitle` — e.g., `DeVerna2024AIFactChecking`, `covaxxy_deverna_2021`
-For presentations: `VenueAbbrevYEAR` — e.g., `CINDTalk26`, `ModelingMisinfoic2s2-24`
+Pattern: `LastnameYEARShortTitle` — e.g., `Smith2024CoolResult`
+For presentations: `VenueAbbrevYEAR` — e.g., `ICWSMTalk24`, `CoolSciSeminar23`

@@ -1,11 +1,11 @@
 ---
 name: cv-update-section
-description: Use when adding or editing entries in Matthew DeVerna's LaTeX CV section files (education, awards, teaching, service, advising, memberships, media, tools, other experience)
+description: Use when adding or editing entries in the LaTeX CV section files in template/ (appointments, education, awards, teaching, service, advising, memberships, media, tools, other experience)
 ---
 
 # Updating a CV Section File
 
-**Reference file:** Read `~/.claude/reference/cv-section-format.md` for the full longtable format, date conventions, and subsection routing.
+**Reference file:** Read `.claude/reference/cv-section-format.md` for the full longtable format, date conventions, and subsection routing.
 
 ## Quick Decision: Which File?
 
@@ -13,6 +13,7 @@ description: Use when adding or editing entries in Matthew DeVerna's LaTeX CV se
 Awards, fellowships, honors?  → awards.tex
 Teaching roles?               → teaching.tex
 Academic service?             → service.tex
+Current/past appointments?    → appointments.tex
 Education?                    → education.tex
 Research positions?           → exp_research.tex
 Media coverage?               → media.tex
@@ -40,8 +41,7 @@ Publications and presentations → use `cv-add-publication` or `cv-add-presentat
 
 ## teaching.tex Subsection Routing
 
-- Stanford → `\subsection*{Stanford University}`
-- Indiana University → `\subsection*{Indiana University Bloomington}`
+- One `\subsection*{University Name}` per institution; add a new one if needed
 
 ## Checklist Before Writing the Entry
 
@@ -58,6 +58,6 @@ Publications and presentations → use `cv-add-publication` or `cv-add-presentat
 | Mistake | Fix |
 |---------|-----|
 | Unescaped `$` in dollar amounts | Use `\$` |
-| Wrong subsection in service.tex | See routing table above |
+| Wrong subsection in service.tex | See routing table above; create the subsection if it doesn't exist |
 | Missing `\\` at end of row | Every longtable row needs `\\` |
 | Bare URL instead of `\href` | Wrap all links in `\href{url}{text}` |

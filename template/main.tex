@@ -11,7 +11,12 @@
 % - 2025-08-19: Include reverse numbering for bibliography sections
 % - 2026-08-29: Fix \cite printing the mirror image of the reversed list
 %               labels (e.g. citing J6 printed "J2" in a 6-item list)
-% 
+% - 2026-10-26: Keep section tables inside the right margin; sort same-year
+%               entries by month; add "x of y" page numbers; supply title
+%               punctuation in one place; add Appointments, Manuscripts
+%               Under Review, Other Writings, Invited Talks, and
+%               Professional Memberships sections
+%
 % Project Overview:
 % -----------------
 % This LaTeX document is designed to help you create a professional CV or 
@@ -32,6 +37,8 @@
 % 1. Customize your personal information by modifying the \mytitle command.
 % 2. Add your content to the respective subfiles (e.g., education.tex, exp_research.tex).
 % 3. Update the bibliography file (ref.bib) with your publications and categorize them with keywords.
+%    Each keyword (R, W, J, C, O, I, T, P, D) is printed by one \printbibliography below.
+%    Remove a subsection here if you have no entries for it.
 %
 % Important Notes:
 % ----------------
@@ -43,19 +50,39 @@
 \documentclass[11pt]{article} % Choose the document class and font size
 \usepackage[margin=1in]{geometry} % Page layout settings
 
+% Helps long URLs break cleanly across lines
+\usepackage{xurl}
+
+% Add a "x of y" style page counter
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyfoot[C]{\thepage\ of \pageref{LastPage}} % Centered footer
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+
 % Set the citation style
 \usepackage[
     backend=biber,      % Specifies the backend to be used by BibLaTeX for processing the bibliography. 'biber' is the default backend.
     maxnames=20,        % Limits the maximum number of author names to display before abbreviating with "et al."
     style=nature,       % Sets the citation style to 'nature,' which is commonly used in scientific papers.
-    sorting=ydnt,       % Specifies the sorting order of entries in the bibliography:
-                        % y - year (descending)
-                        % d - descending order
+    sorting=ddnt,       % Specifies the sorting order of entries in the bibliography:
+                        % d - date (descending; uses the month too, when an entry has one)
                         % n - name
                         % t - title
     defernumbers=true,  % Delays the assignment of citation numbers until the end of the document, allowing for the correct order of citations within each bibliography section.
 ]{biblatex}
 \addbibresource{ref.bib} % Adds the bibliography resource file 'ref.bib' containing all the references.
+
+% The nature style adds no punctuation after the title in the misc/thesis
+% drivers, so supply it here rather than in the .bib data.
+% Leave the trailing period OFF titles in ref.bib.
+\DeclareFieldFormat[misc,thesis,report,online,unpublished]{title}{#1\adddot}
+
+% Give journal articles a `month` in ref.bib so same-year entries are ordered
+% correctly; this clears it at print time so only the year is shown.
+% Delete this line if you want the month printed.
+\AtEveryBibitem{\ifentrytype{article}{\clearfield{month}}{}}
 
 % -- Reverse-numbered bibliography (3, 2, 1) environment START ---
 \usepackage{etaremune}
@@ -178,8 +205,14 @@
 
 % These \pdfbookmark lines create bookmarks in the exported PDF document that display in the left pane.
 % Value in [] sets the indentation level of the bookmark
-\pdfbookmark[1]{Education}{}
+\pdfbookmark[1]{Appointments}{appointments}
+\section*{Appointments}
+\label{appointments}
+\input{appointments.tex}
+
+\pdfbookmark[1]{Education}{education}
 \section*{Education}
+\label{education}
 \input{education.tex}
 
 \pdfbookmark[1]{Research Experience}{exp_research}
@@ -204,13 +237,26 @@
 $\dagger \rightarrow$ Equal contribution
 \normalsize
 
+% Ensures publications which are not cited in the document are included in the sections below
+\nocite{*} % Ensures uncited items are included
+
+
+\pdfbookmark[2]{Manuscripts Under Review}{manuscripts-review}
+\subsection*{Manuscripts Under Review}
+\label{manuscripts-review}
+\newrefcontext[labelprefix=R] % Will prefix bibliography numbers with this letter
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=R, env=revbib]
+
+\pdfbookmark[2]{Manuscripts in Preparation}{manuscripts-prep}
+\subsection*{Manuscripts in Preparation}
+\label{manuscripts-prep}
+\newrefcontext[labelprefix=W]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=W, env=revbib]
 
 \pdfbookmark[2]{Journal Articles}{journal-article}
 \subsection*{Journal Articles}
 \label{journal-article}
-\newrefcontext[labelprefix=J] % Will prefix bibliography numbers with this letter
-% Ensures publications which are not cited in the document are included in the above sections
-\nocite{*} % Ensures uncited items are included
+\newrefcontext[labelprefix=J]
 \printbibliography[
     type=article, % Only include @article ref.bib items
     heading=none, % Do not include header. Gives us more control.
@@ -225,12 +271,12 @@ $\dagger \rightarrow$ Equal contribution
 \newrefcontext[labelprefix=C]
 \printbibliography[type=inproceedings,heading=none,resetnumbers=true,keyword=C, env=revbib]
 
-\pdfbookmark[2]{Working papers}{working-papers}
-\subsection*{Working papers}
-\label{working-papers}
-\newrefcontext[labelprefix=W]
-\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=W, env=revbib]
-    
+\pdfbookmark[2]{Other Writings}{other-writings}
+\subsection*{Other Writings}
+\label{other-writings}
+\newrefcontext[labelprefix=O]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=O, env=revbib]
+
 
 \pdfbookmark[1]{Tools \& Software}{tools}
 \section*{Tools \& Software}
@@ -247,6 +293,12 @@ $\dagger \rightarrow$ Equal contribution
 % \small
 % $\dagger \rightarrow$ Equal contribution
 % \normalsize
+
+\pdfbookmark[2]{Invited Talks}{italks}
+\subsection*{Invited Talks}
+\label{italks}
+\newrefcontext[labelprefix=I]
+\printbibliography[type=misc,heading=none,resetnumbers=true,keyword=I, env=revbib]
 
 \pdfbookmark[2]{Talks}{talks}
 \subsection*{Talks}
@@ -288,6 +340,12 @@ $\dagger \rightarrow$ Equal contribution
 \section*{Academic Service}
 \label{service}
 \input{service.tex}
+
+
+\pdfbookmark[1]{Professional Memberships}{memberships}
+\section*{Professional Memberships}
+\label{memberships}
+\input{memberships.tex}
 
 
 \pdfbookmark[1]{Other Experience}{exp_other}

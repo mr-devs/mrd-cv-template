@@ -21,6 +21,8 @@ See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, fi
   - If you don't know where to start, links to different LaTeX fonts and colors are included within the document
 - Manage and format your publications with BibLaTex
   - Includes reverse numbering for bibliography sections, with `\cite` kept in sync with the reversed labels (see the Publications and Selected Media Coverage sections of [cv-example.pdf](cv-example.pdf))
+  - Sorts entries by date, so same-year articles appear in the right order (give them a `month`; only the year is printed)
+  - Separate sections for manuscripts under review, in preparation, journal articles, conference proceedings, other writings, invited talks, talks, posters, and demos
 - Leverages PDF Bookmarks providing full control over the side-bar sections within the document for easy PDF navigation
 - Includes Claude Code commands for automatically updating different sections of the document
 
@@ -29,6 +31,7 @@ See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, fi
 1. Customize your personal information in the \mytitle
 2. Add your content to the respective section files (e.g., education.tex, exp_research.tex).
 3. Update the ref.bib file with your publications and categorize them using keywords.
+4. If you use the Claude Code skills, replace the placeholder name in `.claude/reference/cv-bib-conventions.md` with your own so new entries bold the right author.
 
 > **Note**: Detailed instructions for each section are included within each file to guide you through the customization process.
 
