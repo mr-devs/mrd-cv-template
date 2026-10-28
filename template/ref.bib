@@ -2,12 +2,14 @@
 % -----------------------------
 % 1. Mark items with a "keyword" that specifies the type of item they will be grouped by within the CV
 % 2. Call \printbibliography in main.tex with the class ('article', 'misc', etc.) and keyword to "select" only the items you want for that group of items
-% 3. Leave the trailing period off titles; the bibliography style supplies title punctuation
+% 3. Leave the trailing period off titles; each part of an entry prints on its own line
+% 4. Put the DOI (https://doi.org/...) or another link in `url`; it becomes the link on the title
+% 5. Add `month` wherever you know it; it is never printed but orders same-year entries
 
 
 % Journals
 % Give articles a `month` so same-year entries sort correctly.
-% main.tex hides it at print time, so only the year is shown.
+% Only the year is printed.
 % #########################################################
 @article{art1,
     author={\textbf{Smith, John R.} and Brown, Michael and Yang, Steven},
@@ -92,13 +94,13 @@
 
 % Manuscripts under review
 % All of the non-standard items require the flexible "misc" class
-% Leave the trailing period off titles -- main.tex adds it for misc entries
+% The venue goes in `howpublished`
 % #########################################################
 
 @misc{Review1,
     title={{Sweet new project about to blow up the scene!}},
     author={\textbf{Smith, John} and Buddy, Best and Super, Advisor},
-    howpublished={Revise and Resubmit at PNAS},
+    howpublished={Revise and Resubmit at \textit{PNAS}},
     year={2023},
     url={https://example.com},
     keywords={R}
@@ -107,7 +109,7 @@
 @misc{Review2,
     title={{The freshest preprint of the bunch}},
     author={\textbf{Smith, John} and Buddy, Best},
-    howpublished={Under review at Nature Human Behaviour},
+    howpublished={Under review at \textit{Nature Human Behaviour}},
     year={2024},
     url={https://example.com},
     keywords={R}
@@ -183,6 +185,8 @@
 
 
 % Talks
+% Presentations print without an author list (you are assumed to be the
+% presenter), but fill in `author` anyway so the record is complete.
 % #########################################################
 
 @misc{Talk1,
@@ -199,16 +203,16 @@
     author={\textbf{Khaled, DJ}},
     howpublished={\ul{Fourth Multidisciplinary International Symposium on Blasting Bangers} (Virtual)},
     note = {\href{https://example.com}{Links like this}},
-    addendum = {\\ -- Extra Formatting also works \\ -- \textbf{Here}.},
+    addendum = {\\ -- Extra Formatting also works \\ -- \textbf{Here}},
     month=oct,
     year={2022},
     keywords={T}
 }
 
 @misc{Talk3,
-    title   = {{A talk someone else gave on our work}},
+    title   = {{A talk on joint work with a coauthor}},
     author  = {Buddy, Best and \textbf{Smith, John}},
-    howpublished={\ul{Annual Meeting of the Cool Science Society} (Chicago, IL, USA; presented by Best Buddy)},
+    howpublished={\ul{Annual Meeting of the Cool Science Society} (Chicago, IL, USA)},
     month   = jan,
     year    = {2024},
     keywords={T}
@@ -259,6 +263,7 @@
 @misc{demo2,
     author = {\textbf{Smith, John}},
     title = {{CoVaxxy: Linking COVID-19 vaccine adoption and online (mis)information}},
+    howpublished = {\ul{Cool Organization Tech Showcase} (Virtual)},
     note = {Include links this way for the \href{https://example.com}{Cool Organization}},
     month = jun,
     year = {2021},

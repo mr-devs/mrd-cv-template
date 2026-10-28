@@ -6,6 +6,22 @@ File: `template/ref.bib` (relative to the repository root)
 
 ---
 
+## How Entries Render
+
+`template/main.tex` (the "Bibliography entry layout" block) prints every entry as:
+
+```
+Title [link icon]  (linked to the entry's url)
+Authors            (omitted for presentations: keywords I, T, P, D)
+Venue, Year
+Note               (only if the entry has a note)
+-- addendum bullets
+```
+
+Volume, number, pages and month are kept in the data but never printed.
+
+---
+
 ## Keyword → CV Section Map
 
 | Entry type | `keywords` | CV Section | Label prefix |
@@ -41,10 +57,15 @@ Use double braces to preserve capitalization:
 ```
 title = {{Title With Preserved Caps}},
 ```
-Leave the trailing period **off**. `main.tex` adds title punctuation for misc entries
-(via `\DeclareFieldFormat`) and the bibliography style handles the rest; a period in
-the data doubles up or breaks `... in Proceedings ...`. Titles that end in `?` or `!`
-keep that mark.
+Leave the trailing period **off**: the title prints on its own line, so a period in
+the data shows up as a stray period. Titles that end in `?` or `!` keep that mark.
+
+---
+
+## Shared Field Rules
+
+- **`url`**: use `https://doi.org/...` whenever a DOI exists. The URL itself is never printed; it becomes the link on the entry's title
+- **Venue names**: don't include the year (e.g. a booktitle ending in "2026"); the CV already prints `year` after the venue
 
 ---
 
@@ -65,8 +86,8 @@ keep that mark.
     keywords= {J}
 }
 ```
-Always include `month` on articles: it orders same-year articles correctly, and
-`main.tex` hides it at print time so only the year is shown.
+Always include `month` on articles: it orders same-year articles correctly. It is
+never printed.
 
 Optional `addendum` for footnotes under entry:
 ```
@@ -93,13 +114,13 @@ addendum = {\\ -- Note text, e.g. award or citation}
 @misc{LastnameYEARShortTitle,
     title        = {{Title}},
     author       = {\textbf{Smith, John R.} and Coauthor, First M.},
-    howpublished = {Revise and Resubmit in [Venue Name]},
+    howpublished = {Revise and Resubmit at \textit{Venue Name}},
     year         = {2024},
     url          = {https://doi.org/...},
     keywords     = {R}
 }
 ```
-Use `Under review at [Venue]` if not yet R&R. Use venue name only (not "Proceedings of...") if accepted to venue.
+Use `Under review at \textit{Venue Name}` if not yet R&R. Use venue name only (not "Proceedings of...") if accepted to venue.
 
 ### @misc — In Preparation (keyword W)
 ```bibtex
@@ -133,18 +154,10 @@ Use `Under review at [Venue]` if not yet R&R. Use venue name only (not "Proceedi
 ```
 howpublished = {\ul{Venue Name} (City, State, Country)},
 ```
-- `\ul{}` underlines the venue name
+- `\ul{}` marks the venue name (rendered as italics in the CV)
+- For events hosted at an institution, use `Event @ Institution` inside `\ul{}`, e.g. `\ul{Cool Lab @ Your University} (Virtual)`. Informal demos (D entries) use the same pattern
 - Virtual events: `(Virtual)` instead of city/state/country
-- Presented by someone else: append `; presented by [Name]` inside the parens:
-  ```
-  howpublished = {\ul{Venue Name} (City, State; presented by First Last)},
-  ```
-
-### howpublished format for informal venues (D entries)
-Informal demos may omit `\ul{}`:
-```
-howpublished = {Invited to the Cool Lab, Your University (Virtual)},
-```
+- Presentations (I, T, P, D) print no author line, since the CV owner is assumed to be the presenter. Don't add a "presented by" note; still fill in `author`
 
 ### month field
 Always include `month` for presentations. Use three-letter abbreviation: `jan`, `feb`, `mar`, `apr`, `may`, `jun`, `jul`, `aug`, `sep`, `oct`, `nov`, `dec`.

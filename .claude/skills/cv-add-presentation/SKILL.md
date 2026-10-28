@@ -30,28 +30,29 @@ howpublished = {\ul{Venue Name} (City, State, Country)},
 howpublished = {\ul{Venue Name} (Virtual)},
 ```
 
-**Presented by someone else:**
+**Event hosted at an institution (including informal demos):**
 ```
-howpublished = {\ul{Venue Name} (City, State; presented by First Last)},
+howpublished = {\ul{Lab or Event Name @ the University} (Virtual)},
 ```
 
-**Informal demo (no \ul{}):**
-```
-howpublished = {Invited to the Lab Name, University (Virtual)},
-```
+Keep the year out of the venue name: the CV prints it after the venue
+(`Venue (City), 2024`). `\ul{}` renders as italics in the CV.
+
+Presentations (`I`, `T`, `P`, `D`) print no author line, since the CV owner
+is assumed to be the presenter, so don't add a presenter note. Still fill in
+`author` with the full author list.
 
 ## Checklist Before Writing the Entry
 
 - [ ] Entry type is `@misc`
 - [ ] Correct keyword: `I`, `T`, `P`, or `D`
-- [ ] `\ul{}` wraps venue name (for formal venues)
+- [ ] `\ul{}` wraps venue name
 - [ ] Location in parentheses after venue
 - [ ] `(Virtual)` used for remote presentations
-- [ ] `; presented by First Last` appended if the CV owner didn't present
 - [ ] `month` field included (three-letter abbreviation: `jan`, `feb`, etc.)
 - [ ] CV owner's name bolded (see the reference file): `\textbf{Last, First M.}`
 - [ ] Title in double braces, no trailing period: `title = {{Title}}`
-      (`main.tex` adds the period for misc/thesis entries via `\DeclareFieldFormat`)
+      (each field prints on its own line in the CV, so no punctuation is needed)
 
 ## Common Mistakes
 
@@ -60,4 +61,4 @@ howpublished = {Invited to the Lab Name, University (Virtual)},
 | Using `@inproceedings` for a talk | All presentations use `@misc` |
 | Missing `\ul{}` around venue | Wrap formal venue names in `\ul{Venue}` |
 | Forgetting `month` | Required for all presentation entries |
-| Omitting presenter note | Add `; presented by Name` inside location parens |
+| Year in the venue name | Drop it; the CV prints `year` after the venue |

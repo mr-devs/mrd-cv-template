@@ -23,8 +23,9 @@ Dissertation, blog, other?→ @misc,          keywords={O}
 - [ ] CV owner's name bolded (see the reference file): `\textbf{Last, First M.}`
 - [ ] Equal contribution authors marked: `Author$^{\dagger}$, First` (no space before `$`)
 - [ ] Title in double braces, no trailing period: `title = {{Title Text}}`
-      (the bibliography style supplies title punctuation; a period in the data doubles up or breaks `... in Proceedings ...`)
-- [ ] Journal articles include `month` (sorts same-year articles; hidden at print time)
+      (the title prints on its own line in the CV, so a period in the data shows up as a stray period)
+- [ ] `url` set to `https://doi.org/...` when a DOI exists (it becomes the link on the title)
+- [ ] Journal articles include `month` (sorts same-year articles; never printed)
 - [ ] Entry placed in the correct comment-delimited section of `ref.bib`
 - [ ] Cite key follows `LastnameYEARShortTitle` pattern
 

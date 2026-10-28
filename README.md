@@ -20,8 +20,10 @@ See [**cv-example.pdf**](cv-example.pdf) for a rendered PDF of this template, fi
 - Easy to customize with different fonts, link colors, etc.
   - If you don't know where to start, links to different LaTeX fonts and colors are included within the document
 - Manage and format your publications with BibLaTex
+  - Clean, scannable entries: title (linked to its DOI or URL, with a small link icon), authors, then venue and year, plus optional bullet notes for awards and the like
+  - Presentations list just the title, venue, and year (the author list is hidden, on the assumption that you gave them; one line in `main.tex` to change)
   - Includes reverse numbering for bibliography sections, with `\cite` kept in sync with the reversed labels (see the Publications and Selected Media Coverage sections of [cv-example.pdf](cv-example.pdf))
-  - Sorts entries by date, so same-year articles appear in the right order (give them a `month`; only the year is printed)
+  - Sorts entries by date, so same-year entries appear in the right order (give them a `month`; only the year is printed)
   - Separate sections for manuscripts under review, in preparation, journal articles, conference proceedings, other writings, invited talks, talks, posters, and demos
 - Leverages PDF Bookmarks providing full control over the side-bar sections within the document for easy PDF navigation
 - Includes Claude Code commands for automatically updating different sections of the document

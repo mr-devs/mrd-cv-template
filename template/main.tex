@@ -16,6 +16,9 @@
 %               punctuation in one place; add Appointments, Manuscripts
 %               Under Review, Other Writings, Invited Talks, and
 %               Professional Memberships sections
+% - 2026-10-27: Simplify bibliography entries to title (linked, with a link
+%               icon) / authors / venue, year / bullets; hide authors on
+%               presentations; keep each entry on one page
 %
 % Project Overview:
 % -----------------
@@ -28,7 +31,7 @@
 % -------------
 % - Customizable sections: Education, Research Experience, Awards, Publications, etc.
 % - Bookmarks in the PDF for easy navigation
-% - Styled bibliography with BibLaTeX
+% - Styled bibliography with BibLaTeX (title linked to its DOI/URL, authors, venue, year)
 % - Hyperlinked email and website
 % - FontAwesome icons for additional styling
 %
@@ -74,15 +77,94 @@
 ]{biblatex}
 \addbibresource{ref.bib} % Adds the bibliography resource file 'ref.bib' containing all the references.
 
-% The nature style adds no punctuation after the title in the misc/thesis
-% drivers, so supply it here rather than in the .bib data.
+% -- Bibliography entry layout START ---
+% Every entry prints on its own short lines:
+%
+%   Title [link icon]   <- title links to the entry's `url` (e.g. its DOI)
+%   Authors             <- omitted for presentations (see below)
+%   Venue, Year
+%   Note                <- only if the entry has a `note`
+%   -- addendum bullets <- only if the entry has an `addendum`
+%
+% Volume, pages and month are never printed. Give entries a `month` anyway:
+% it is what orders same-year entries correctly (see `sorting=ddnt` above).
 % Leave the trailing period OFF titles in ref.bib.
-\DeclareFieldFormat[misc,thesis,report,online,unpublished]{title}{#1\adddot}
 
-% Give journal articles a `month` in ref.bib so same-year entries are ordered
-% correctly; this clears it at print time so only the year is shown.
-% Delete this line if you want the month printed.
-\AtEveryBibitem{\ifentrytype{article}{\clearfield{month}}{}}
+% Change these to restyle the title or venue without touching anything else
+\newcommand*{\pubtitlefont}[1]{#1}
+\newcommand*{\pubvenuefont}[1]{\mkbibemph{#1}}
+
+% Linked titles stay black so they read like unlinked ones; a small icon in
+% the link color marks them as clickable (and is itself a link)
+\newcommand*{\pubtitlelink}[2]{%
+  {\hypersetup{urlcolor=black}\href{#1}{#2}}%
+  \nobreakspace\href{#1}{\footnotesize\faExternalLink}}
+
+\DeclareFieldFormat*{title}{%
+  \iffieldundef{url}
+    {\pubtitlefont{#1}}
+    {\pubtitlelink{\thefield{url}}{\pubtitlefont{#1}}}}
+\DeclareFieldFormat*{journaltitle}{\pubvenuefont{#1}}
+\DeclareFieldFormat*{booktitle}{\pubvenuefont{#1}}
+\DeclareFieldFormat*{howpublished}{#1}
+
+% No trailing period after the last line
+\renewcommand*{\finentrypunct}{}
+
+% #1 prints the venue field for this entry type
+\newbibmacro{simple:entry}[1]{%
+  \printfield{title}%
+  % Presentations (keywords I, T, P, D) hide the author list, on the
+  % assumption that you gave them. To show authors for a section, delete
+  % its `test {\ifkeyword{X}}` (and the `or` next to it).
+  \ifboolexpr{test {\ifkeyword{I}} or test {\ifkeyword{T}}
+              or test {\ifkeyword{P}} or test {\ifkeyword{D}}}
+    {}
+    {\ifnameundef{author}{}{\newline\printnames{author}}}%
+  \newline
+  #1%
+  \iffieldundef{year}{}{\addcomma\space\printfield{year}}%
+  \iffieldundef{note}{}{\newline\printfield{note}}%
+  \printfield{addendum}%
+}
+
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{simple:entry}{\printfield{journaltitle}}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{simple:entry}{\printfield{booktitle}}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{simple:entry}{\printfield{howpublished}}%
+  \usebibmacro{finentry}}
+
+% Keep each entry together on one page. Under \RaggedRight (used below),
+% ragged2e makes \newline and \\ end the paragraph, which would let a page
+% break land in the middle of an entry, so inside the bibliography both
+% become a plain in-paragraph line break.
+\newcommand*{\pubnewline}{\unskip\nobreak\hfil\break}
+\appto{\bibsetup}{%
+  \interlinepenalty=10000\relax
+  \let\newline\pubnewline
+  \let\\\pubnewline
+  % Ragged-right lines don't need hyphenation; this keeps titles intact
+  \hyphenpenalty=10000\relax
+  \emergencystretch=3em\relax % break long lines early instead of overflowing
+  % Presentation venues are wrapped in \ul{} in ref.bib; render them as
+  % italics to match journal and conference names
+  \let\ul\mkbibemph}
+
+% Space between entries (applied by the revbib environment below)
+\setlength{\bibitemsep}{0.6em}
+% -- Bibliography entry layout END ---
 
 % -- Reverse-numbered bibliography (3, 2, 1) environment START ---
 \usepackage{etaremune}
@@ -91,6 +173,7 @@
     \csname begin\endcsname{etaremune}%
     % Align indent with biblatex’s numeric label width
     \setlength{\leftmargin}{\dimexpr\labelnumberwidth+\labelsep\relax}%
+    \setlength{\itemsep}{\bibitemsep}%
     % Prefix from \newrefcontext[labelprefix=...] + descending number (no parentheses)
     \renewcommand*{\labelenumi}{\printfield{labelprefix}\arabic{enumi}}%
   }
