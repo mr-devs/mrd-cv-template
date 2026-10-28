@@ -20,7 +20,7 @@ Dissertation, blog, other?→ @misc,          keywords={O}
 ## Checklist Before Writing the Entry
 
 - [ ] Correct entry type and keyword (see above)
-- [ ] CV owner's name bolded (see the reference file): `\textbf{Last, First M.}`
+- [ ] CV owner's name bolded (see the reference file): `\textbf{First M. Last}`
 - [ ] Equal contribution authors marked: `Author$^{\dagger}$, First` (no space before `$`)
 - [ ] Title in double braces, no trailing period: `title = {{Title Text}}`
       (the title prints on its own line in the CV, so a period in the data shows up as a stray period)

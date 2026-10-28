@@ -2,7 +2,7 @@
 
 File: `template/ref.bib` (relative to the repository root)
 
-> **Make this yours:** replace the placeholder name `Smith, John R.` throughout this file with your own name, in `Last, First M.` format, so new entries bold the right author.
+> **Make this yours:** replace the placeholder name `John R. Smith` throughout this file with your own name, in `First M. Last` format, so new entries bold the right author.
 
 ---
 
@@ -40,12 +40,12 @@ Volume, number, pages and month are kept in the data but never printed.
 
 ## Author Formatting
 
-- **Always bold the CV owner**: `\textbf{Smith, John R.}` (Last, First M. format)
-- **All authors**: `Last, First M.` format, separated by ` and `
-- **Equal contribution**: place `$^{\dagger}$` *immediately after the last name*, before the comma
+- **Always bold the CV owner**: `\textbf{John R. Smith}` (First M. Last format, so it prints as written)
+- **Coauthors**: `Last, First M.` format (printed as full names, given name first), separated by ` and `
+- **Equal contribution**: place `$^{\dagger}$` *immediately after the last name* (before the comma for coauthors; at the end for the bolded owner)
   (the marker is explained under the Publications heading in `main.tex`):
   ```
-  Doe$^{\dagger}$, Jane and \textbf{Smith$^{\dagger}$, John R.} and Roe, Richard
+  Doe$^{\dagger}$, Jane and \textbf{John R. Smith$^{\dagger}$} and Roe, Richard
   ```
   No space between the name and `$^{\dagger}$`.
 
@@ -75,7 +75,7 @@ the data shows up as a stray period. Titles that end in `?` or `!` keep that mar
 ```bibtex
 @article{LastnameYEARShortTitle,
     title   = {{Title}},
-    author  = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author  = {\textbf{John R. Smith} and Coauthor, First M.},
     journal = {Journal Name},
     volume  = {1},
     number  = {2},
@@ -97,7 +97,7 @@ addendum = {\\ -- Note text, e.g. award or citation}
 ### @inproceedings (keyword C)
 ```bibtex
 @inproceedings{LastnameYEARShortTitle,
-    author    = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author    = {\textbf{John R. Smith} and Coauthor, First M.},
     title     = {{Title}},
     booktitle = {Proceedings of the Conference Name},
     volume    = {15},
@@ -113,7 +113,7 @@ addendum = {\\ -- Note text, e.g. award or citation}
 ```bibtex
 @misc{LastnameYEARShortTitle,
     title        = {{Title}},
-    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author       = {\textbf{John R. Smith} and Coauthor, First M.},
     howpublished = {Revise and Resubmit at \textit{Venue Name}},
     year         = {2024},
     url          = {https://doi.org/...},
@@ -126,7 +126,7 @@ Use `Under review at \textit{Venue Name}` if not yet R&R. Use venue name only (n
 ```bibtex
 @misc{LastnameYEARShortTitle,
     title        = {{Title}},
-    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author       = {\textbf{John R. Smith} and Coauthor, First M.},
     howpublished = {arXiv[Preprint]},
     year         = {2024},
     url          = {https://doi.org/...},
@@ -137,7 +137,7 @@ Use `Under review at \textit{Venue Name}` if not yet R&R. Use venue name only (n
 ### @misc — Other Writings (keyword O)
 ```bibtex
 @misc{LastnameYEARShortTitle,
-    author       = {\textbf{Smith, John R.}},
+    author       = {\textbf{John R. Smith}},
     title        = {{Title}},
     howpublished = {PhD dissertation, Your University},
     month        = jun,
@@ -166,7 +166,7 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ```bibtex
 @misc{VenueYEAR,
     title        = {{Title}},
-    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author       = {\textbf{John R. Smith} and Coauthor, First M.},
     howpublished = {\ul{Seminar/Lab/Event Name} (City, State, Country)},
     month        = apr,
     year         = {2024},
@@ -178,7 +178,7 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ```bibtex
 @misc{VenueShortYEAR,
     title        = {{Title}},
-    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author       = {\textbf{John R. Smith} and Coauthor, First M.},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jul,
     year         = {2024},
@@ -190,7 +190,7 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ```bibtex
 @misc{VenueShortYEAR,
     title        = {{Title}},
-    author       = {\textbf{Smith, John R.} and Coauthor, First M.},
+    author       = {\textbf{John R. Smith} and Coauthor, First M.},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jul,
     year         = {2024},
@@ -201,7 +201,7 @@ Always include `month` for presentations. Use three-letter abbreviation: `jan`, 
 ### Demo/Tutorial (keyword D)
 ```bibtex
 @misc{ToolNameN,
-    author       = {\textbf{Smith, John R.}},
+    author       = {\textbf{John R. Smith}},
     title        = {{Tool Name: Subtitle}},
     howpublished = {\ul{Conference Name} (City, State, Country)},
     month        = jun,

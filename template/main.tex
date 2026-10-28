@@ -77,6 +77,17 @@
 ]{biblatex}
 \addbibresource{ref.bib} % Adds the bibliography resource file 'ref.bib' containing all the references.
 
+% Print full author names, given name first (e.g., "John R. Smith"), instead of
+% the nature style's abbreviated "Smith, J. R."
+\DeclareNameFormat{default}{%
+  \nameparts{#1}%
+  \usebibmacro{name:given-family}
+    {\namepartfamily}
+    {\namepartgiven}
+    {\namepartprefix}
+    {\namepartsuffix}%
+  \usebibmacro{name:andothers}}
+
 % -- Bibliography entry layout START ---
 % Every entry prints on its own short lines:
 %

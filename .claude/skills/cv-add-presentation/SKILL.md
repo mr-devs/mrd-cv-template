@@ -50,7 +50,7 @@ is assumed to be the presenter, so don't add a presenter note. Still fill in
 - [ ] Location in parentheses after venue
 - [ ] `(Virtual)` used for remote presentations
 - [ ] `month` field included (three-letter abbreviation: `jan`, `feb`, etc.)
-- [ ] CV owner's name bolded (see the reference file): `\textbf{Last, First M.}`
+- [ ] CV owner's name bolded (see the reference file): `\textbf{First M. Last}`
 - [ ] Title in double braces, no trailing period: `title = {{Title}}`
       (each field prints on its own line in the CV, so no punctuation is needed)
 
